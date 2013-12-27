@@ -22,3 +22,8 @@ node["postgresql"]["server"]["packages"].each do |name|
     action :install
   end
 end
+
+service "postgresql" do
+  service_name node["postgresql"]["server"]["service_name"]
+  action [:enable, :start]
+end

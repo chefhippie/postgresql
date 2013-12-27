@@ -17,21 +17,16 @@
 # limitations under the License.
 #
 
-case node["platform_family"]
-when "debian"
-  default["postgresql"]["server"]["packages"] = %w(
+default["postgresql"]["server"]["packages"] = value_for_platform_family(
+  "debian" => %w(
     postgresql
-  )
-when "ubuntu"
-  default["postgresql"]["server"]["packages"] = %w(
+  ),
+  "ubuntu" => %w(
     postgresql
-  )
-when "suse"
-  default["postgresql"]["server"]["packages"] = %w(
+  ),
+  "suse" => %w(
     postgresql-server
   )
-end
+)
 
 default["postgresql"]["server"]["service_name"] = "postgresql"
-default["postgresql"]["server"]["listen"] = "127.0.0.1"
-default["postgresql"]["server"]["port"] = 5432
