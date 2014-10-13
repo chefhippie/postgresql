@@ -23,6 +23,11 @@ attribute :database, :kind_of => String, :name_attribute => true
 attribute :username, :kind_of => String, :default => nil
 attribute :password, :kind_of => String, :default => nil
 
-
+attribute :connection, :kind_of => Hash, :default => {
+  "host" => "localhost",
+  "port" => 3306,
+  "username" => node["postgresql"]["credentials"]["username"],
+  "password" => node["postgresql"]["credentials"]["password"]
+}
 
 default_action :create

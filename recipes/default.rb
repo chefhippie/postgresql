@@ -17,4 +17,5 @@
 # limitations under the License.
 #
 
+include_recipe "postgresql::credentials"
 include_recipe "postgresql::server"

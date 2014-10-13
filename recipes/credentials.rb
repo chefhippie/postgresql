@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: postgresql
-# Recipe:: server
+# Recipe:: credentials
 #
 # Copyright 2013, Thomas Boerger
 #
@@ -17,10 +17,16 @@
 # limitations under the License.
 #
 
-include_recipe "postgresql::credentials"
-
-node["postgresql"]["server"]["packages"].each do |name|
-  package name do
-    action :install
+if Chef::Config[:solo] and not node.recipes.include?("chef-solo-search")
+  log "Using attribute based postgresql credentials" do
+    level :info
   end
+else
+  credentials = search(
+    "postgresql",
+    "fqdn:#{node["fqdn"]} OR id:default"
+  ).first.to_hash
+
+  node.set["postgresql"]["credentials"]["username"] = credentials["username"]
+  node.set["postgresql"]["credentials"]["password"] = credentials["password"]
 end

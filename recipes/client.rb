@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: postgresql
-# Recipe:: server
+# Recipe:: client
 #
 # Copyright 2013, Thomas Boerger
 #
@@ -16,11 +16,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-include_recipe "postgresql::credentials"
-
-node["postgresql"]["server"]["packages"].each do |name|
-  package name do
-    action :install
-  end
-end

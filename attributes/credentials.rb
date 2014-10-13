@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: postgresql
-# Recipe:: server
+# Attributes:: credentials
 #
 # Copyright 2013, Thomas Boerger
 #
@@ -17,10 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe "postgresql::credentials"
-
-node["postgresql"]["server"]["packages"].each do |name|
-  package name do
-    action :install
-  end
-end
+default["postgresql"]["credentials"]["username"] = "postgres"
+default["postgresql"]["credentials"]["password"] = "postgres"
