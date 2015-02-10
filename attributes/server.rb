@@ -21,9 +21,6 @@ default["postgresql"]["server"]["packages"] = value_for_platform_family(
   "debian" => %w(
     postgresql
   ),
-  "ubuntu" => %w(
-    postgresql
-  ),
   "suse" => %w(
     postgresql-server
   )
